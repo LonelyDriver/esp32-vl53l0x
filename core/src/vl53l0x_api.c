@@ -410,6 +410,7 @@ VL53L0X_Error VL53L0X_DataInit(VL53L0X_DEV Dev)
 
 	/* Get default parameters */
 	Status = VL53L0X_GetDeviceParameters(Dev, &CurrentParameters);
+	printf("GetDefaultParameters=%d\n", Status);
 	if (Status == VL53L0X_ERROR_NONE) {
 		/* initialize PAL values */
 		CurrentParameters.DeviceMode = VL53L0X_DEVICEMODE_SINGLE_RANGING;
@@ -435,6 +436,7 @@ VL53L0X_Error VL53L0X_DataInit(VL53L0X_DEV Dev)
 	Status |= VL53L0X_WrByte(Dev, 0xFF, 0x00);
 	Status |= VL53L0X_WrByte(Dev, 0x80, 0x00);
 
+	printf("VL53L0X_DataInit STATUS=%d\n", Status);
 	/* Enable all check */
 	for (i = 0; i < VL53L0X_CHECKENABLE_NUMBER_OF_CHECKS; i++) {
 		if (Status == VL53L0X_ERROR_NONE)
@@ -565,7 +567,7 @@ VL53L0X_Error VL53L0X_StaticInit(VL53L0X_DEV Dev)
 	LOG_FUNCTION_START("");
 
 	Status = VL53L0X_get_info_from_device(Dev, 1);
-
+	
 	/* set the ref spad from NVM */
 	count	= (uint32_t)VL53L0X_GETDEVICESPECIFICPARAMETER(Dev,
 		ReferenceSpadCount);

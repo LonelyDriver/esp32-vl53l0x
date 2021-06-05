@@ -53,7 +53,7 @@ VL53L0X_Error VL53L0X_WriteMulti(VL53L0X_DEV Dev, uint8_t index, uint8_t *pdata,
     i2c_master_stop(cmd);
     esp_err_t ret = i2c_master_cmd_begin(Dev->i2c_port_num, cmd, 1000 / portTICK_RATE_MS);
     i2c_cmd_link_delete(cmd);
-
+    
     return esp_to_vl53l0x_error(ret);
 }
 
